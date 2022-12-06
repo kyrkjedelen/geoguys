@@ -1,0 +1,19 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+        "type": "Feature",
+        "properties": {
+            "name": "Test",
+            "description": "Lorem ipsum Lorem lorem. Lorem ipsum Lorem lorem. Lorem ipsum Lorem lorem. Lorem ipsum Lorem lorem. "
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                15.63464487799314,
+                78.20620464257198
+            ]
+        }
+        }
+    ]
+}
