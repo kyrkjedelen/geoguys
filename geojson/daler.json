@@ -5,6 +5,7 @@
       "type": "Feature",
       "properties": {
         "name": "Vannledningsdalen",
+        "description": "Dette er vannledningsdalen. <3",
         "markers": "vannledningsdalen.json"
       },
       "geometry": {

@@ -6,7 +6,8 @@ type Point = [number, number];
 
 interface PolygonProperties {
     name: string,
-    markers: string
+    markers: string,
+    description: string
 }
 interface TileLayer {
     link: string,
@@ -65,6 +66,8 @@ function generateTileLayer(tileLayerSettings: TileLayer) {
 TILE_LAYER_SETTINGS_ARRAY.forEach(generateTileLayer);
 
 function clickedPolygon(properties: PolygonProperties, target: any) {
+    resetInfoBox(properties.name, properties.description);
+
     MAP.fitBounds(target.getBounds());
     importGeoJsonMarkers(properties.markers);
 }
@@ -75,7 +78,9 @@ function manipulatePolygons(feature: GeoJSON.Feature<GeoJSON.Geometry, any>, lay
     });
 }
 function manipulateMarkers(feature: GeoJSON.Feature<GeoJSON.Geometry, any>, layer: L.Layer) {
-    layer.on("click", () => {console.log("Marker clicked!")});
+    layer.on("click", (event) => {
+        resetInfoBox(feature.properties.name, feature.properties.description);
+    });
 }
 
 async function importGeoJson(src: string): Promise<GeoJSON.GeoJsonObject> {
@@ -106,6 +111,23 @@ async function importGeoJsonMarkers(src: string) {
     L.geoJSON(json, {
         onEachFeature: manipulateMarkers
     }).addTo(MAP);
+}
+// INFO BOX:
+const INFO_BOX_ELEMENT = document.querySelector("#info-box") as HTMLDivElement;
+const MAP_ELEMENT = document.querySelector("#map") as HTMLDivElement;
+
+function resetInfoBox(name: string, description: string) {
+    INFO_BOX_ELEMENT.classList.remove("hidden");
+    MAP_ELEMENT.classList.remove("alone")
+
+    const nameElement = document.createElement("h1");
+    const descriptionElement = document.createElement("p");
+
+    INFO_BOX_ELEMENT.innerHTML = "";
+    nameElement.textContent = name;
+    descriptionElement.textContent = description;
+
+    INFO_BOX_ELEMENT.append(nameElement, descriptionElement);
 }
 
 importGeoJsonPolygons("daler.json");

@@ -4,8 +4,8 @@
         {
         "type": "Feature",
         "properties": {
-            "name": "Test",
-            "description": "Lorem ipsum Lorem lorem. Lorem ipsum Lorem lorem. Lorem ipsum Lorem lorem. Lorem ipsum Lorem lorem. "
+            "name": "Marker",
+            "description": "Jeg er en marker. Hallo. :-)"
         },
         "geometry": {
             "type": "Point",
