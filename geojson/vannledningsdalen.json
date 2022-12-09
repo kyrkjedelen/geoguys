@@ -5,7 +5,8 @@
         "type": "Feature",
         "properties": {
             "name": "Marker",
-            "description": "Jeg er en marker. Hallo. :-)"
+            "description": "Jeg er en marker. Hallo. :-)",
+            "image": "images/test.jpg"
         },
         "geometry": {
             "type": "Point",

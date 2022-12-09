@@ -6,7 +6,8 @@
       "properties": {
         "name": "Gruve 7",
         "description": "Langs veien for det meste.",
-        "markers": "gruve-7.json"
+        "markers": "gruve-7.json",
+        "image": ""
       },
       "geometry": {
         "coordinates": [
@@ -73,7 +74,8 @@
       "properties": {
         "name": "Vannledningsdalen",
         "description": "Ikke gått enda.",
-        "markers": "vannledningsdalen.json"
+        "markers": "vannledningsdalen.json",
+        "image": ""
       },
       "geometry": {
         "coordinates": [

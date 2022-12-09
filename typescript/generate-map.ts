@@ -7,7 +7,8 @@ type Point = [number, number];
 interface PolygonProperties {
     name: string,
     markers: string,
-    description: string
+    description: string,
+    image: string
 }
 interface TileLayer {
     link: string,
@@ -66,7 +67,7 @@ function generateTileLayer(tileLayerSettings: TileLayer) {
 TILE_LAYER_SETTINGS_ARRAY.forEach(generateTileLayer);
 
 function clickedPolygon(properties: PolygonProperties, target: any) {
-    resetInfoBox(properties.name, properties.description);
+    resetInfoBox(properties.name, properties.image, properties.description);
 
     MAP.fitBounds(target.getBounds());
     importGeoJsonMarkers(properties.markers);
@@ -78,8 +79,9 @@ function manipulatePolygons(feature: GeoJSON.Feature<GeoJSON.Geometry, any>, lay
     });
 }
 function manipulateMarkers(feature: GeoJSON.Feature<GeoJSON.Geometry, any>, layer: L.Layer) {
-    layer.on("click", (event) => {
-        resetInfoBox(feature.properties.name, feature.properties.description);
+    layer.on("click", () => {
+        resetInfoBox(feature.properties.name, feature.properties.image, feature.properties.description);
+        console.log(feature.properties.image);
     });
 }
 
@@ -116,7 +118,7 @@ async function importGeoJsonMarkers(src: string) {
 const INFO_BOX_ELEMENT = document.querySelector("#info-box") as HTMLDivElement;
 const MAP_ELEMENT = document.querySelector("#map") as HTMLDivElement;
 
-function resetInfoBox(name: string, description: string) {
+function resetInfoBox(name: string, imageSrc: string, description: string) {
     INFO_BOX_ELEMENT.classList.remove("hidden");
     MAP_ELEMENT.classList.remove("alone")
 
@@ -127,7 +129,13 @@ function resetInfoBox(name: string, description: string) {
     nameElement.textContent = name;
     descriptionElement.textContent = description;
 
-    INFO_BOX_ELEMENT.append(nameElement, descriptionElement);
+    if(imageSrc) {
+        const imageElement = document.createElement("img");
+        imageElement.src = imageSrc;
+        INFO_BOX_ELEMENT.append(nameElement, imageElement, descriptionElement);
+    } else {
+        INFO_BOX_ELEMENT.append(nameElement, descriptionElement);
+    }
 }
 
 importGeoJsonPolygons("daler.json");
