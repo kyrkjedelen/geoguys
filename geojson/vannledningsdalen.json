@@ -2,19 +2,29 @@
     "type": "FeatureCollection",
     "features": [
         {
-        "type": "Feature",
-        "properties": {
-            "name": "Marker",
-            "description": "Jeg er en marker. Hallo. :-)",
-            "image": "images/test.jpg"
-        },
-        "geometry": {
-            "type": "Point",
-            "coordinates": [
-                15.63464487799314,
-                78.20620464257198
-            ]
-        }
+            "type": "Feature",
+            "properties": {
+                "name": "Marker",
+                "description": "Jeg er en marker. Hallo. :-)",
+                "image": "images/test.jpg",
+                "origin": {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                            0,
+                            0
+                        ]
+                    }
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    15.63464487799314,
+                    78.20620464257198
+                ]
+            }
         }
     ]
 }

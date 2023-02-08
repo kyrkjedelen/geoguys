@@ -80,7 +80,7 @@ function manipulatePolygons(feature: GeoJSON.Feature<GeoJSON.Geometry, any>, lay
 }
 function manipulateMarkers(feature: GeoJSON.Feature<GeoJSON.Geometry, any>, layer: L.Layer) {
     layer.on("click", () => {
-        resetInfoBox(feature.properties.name, feature.properties.image, feature.properties.description);
+        resetInfoBox(feature.properties.name, feature.properties.image, feature.properties.description, feature.properties.origin);
         console.log(feature.properties.image);
     });
 }
@@ -118,7 +118,7 @@ async function importGeoJsonMarkers(src: string) {
 const INFO_BOX_ELEMENT = document.querySelector("#info-box") as HTMLDivElement;
 const MAP_ELEMENT = document.querySelector("#map") as HTMLDivElement;
 
-function resetInfoBox(name: string, imageSrc: string, description: string) {
+function resetInfoBox(name: string, imageSrc: string, description: string, origin?: GeoJSON.GeoJsonObject) {
     INFO_BOX_ELEMENT.classList.remove("hidden");
     MAP_ELEMENT.classList.remove("alone")
 
@@ -128,6 +128,16 @@ function resetInfoBox(name: string, imageSrc: string, description: string) {
     INFO_BOX_ELEMENT.innerHTML = "";
     nameElement.textContent = name;
     descriptionElement.textContent = description;
+
+    if(origin) {
+        const originElement = document.createElement("button");
+        originElement.textContent = "Trykk her for å finne ut hvor denne steinen ble lagd.";
+        originElement.addEventListener("click", () => {
+            let hallo = L.geoJSON(origin).addTo(MAP);
+            MAP.fitBounds(hallo.getBounds());
+        });
+        INFO_BOX_ELEMENT.append(originElement);
+    }
 
     if(imageSrc) {
         const imageElement = document.createElement("img");

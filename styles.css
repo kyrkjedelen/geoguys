@@ -8,6 +8,7 @@
 }
 #info-box {
     border-top: solid 1px black;
+    background-color: pink;
 }
 
 #info-box.hidden {
